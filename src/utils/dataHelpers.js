@@ -120,3 +120,35 @@ export function getPatientTimeline(
 
   return events.sort((a, b) => new Date(b.date) - new Date(a.date));
 }
+
+export function formatDate(dateStr) {
+  if (!dateStr) return "—";
+  const date = new Date(dateStr);
+  if (Number.isNaN(date.getTime())) return dateStr;
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+}
+
+export function formatDateTime(dateStr) {
+  if (!dateStr) return "—";
+  const date = new Date(dateStr);
+  if (Number.isNaN(date.getTime())) return dateStr;
+  return date.toLocaleString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+  });
+}
+
+export function calculateAge(dob) {
+  if (!dob) return "—";
+  const birth = new Date(dob);
+  if (Number.isNaN(birth.getTime())) return "—";
+  const diff = Date.now() - birth.getTime();
+  return Math.abs(new Date(diff).getUTCFullYear() - 1970);
+}
