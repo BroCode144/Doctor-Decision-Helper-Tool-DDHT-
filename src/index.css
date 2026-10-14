@@ -1,0 +1,81 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Manrope", ui-sans-serif, system-ui, sans-serif;
+
+  --color-brand-50: #eefbf8;
+  --color-brand-100: #d3f4ec;
+  --color-brand-200: #a6e8da;
+  --color-brand-300: #6fd6c3;
+  --color-brand-400: #3cbda6;
+  --color-brand-500: #1fa38c;
+  --color-brand-600: #158272;
+  --color-brand-700: #14685e;
+  --color-brand-800: #14534c;
+  --color-brand-900: #124540;
+  --color-brand-950: #062825;
+
+  --color-ink-50: #f6f7f9;
+  --color-ink-100: #eceef1;
+  --color-ink-200: #d5d9e0;
+  --color-ink-300: #b1b8c4;
+  --color-ink-400: #8791a3;
+  --color-ink-500: #697389;
+  --color-ink-600: #545d72;
+  --color-ink-700: #454c5d;
+  --color-ink-800: #3a3f4d;
+  --color-ink-900: #232630;
+  --color-ink-950: #16181f;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background-color: var(--color-ink-50);
+  color: var(--color-ink-900);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-ink-300) transparent;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-toast-in {
+  animation: toast-in 0.18s ease-out;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.15s ease-out;
+}
