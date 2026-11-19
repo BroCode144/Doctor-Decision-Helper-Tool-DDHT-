@@ -1,0 +1,1 @@
+"""Feature modules. Each folder is one feature: its API routes (router.py) plus the logic behind them. Modules may import from app.core, app.db, app.models, app.schemas and app.shared, and from each other's service files."""
