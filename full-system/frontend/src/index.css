@@ -1,0 +1,326 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Manrope", ui-sans-serif, system-ui, sans-serif;
+
+  /* Primary — blue (#2563EB = brand-600) */
+  --color-brand-50: #eff6ff;
+  --color-brand-100: #dbeafe;
+  --color-brand-200: #bfdbfe;
+  --color-brand-300: #93c5fd;
+  --color-brand-400: #60a5fa;
+  --color-brand-500: #3b82f6;
+  --color-brand-600: #2563eb;
+  --color-brand-700: #1d4ed8;
+  --color-brand-800: #1e40af;
+  --color-brand-900: #1e3a8a;
+  --color-brand-950: #172554;
+
+  /* Secondary — sky (#0EA5E9 = accent-500) */
+  --color-accent-50: #f0f9ff;
+  --color-accent-100: #e0f2fe;
+  --color-accent-200: #bae6fd;
+  --color-accent-400: #38bdf8;
+  --color-accent-500: #0ea5e9;
+  --color-accent-600: #0284c7;
+  --color-accent-700: #0369a1;
+
+  /* Neutrals — slate (background #F8FAFC = ink-50, text #0F172A = ink-900) */
+  --color-ink-50: #f8fafc;
+  --color-ink-100: #f1f5f9;
+  --color-ink-200: #e2e8f0;
+  --color-ink-300: #cbd5e1;
+  --color-ink-400: #94a3b8;
+  --color-ink-500: #64748b;
+  --color-ink-600: #475569;
+  --color-ink-700: #334155;
+  --color-ink-800: #1e293b;
+  --color-ink-900: #0f172a;
+  --color-ink-950: #020617;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background-color: var(--color-ink-50);
+  color: var(--color-ink-900);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-ink-300) transparent;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-toast-in {
+  animation: toast-in 0.18s ease-out;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.15s ease-out;
+}
+
+/* ---- Sign-in page: a slowly moving background and a calm entrance ---- */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-rise-in {
+  animation: rise-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--delay, 0ms);
+}
+
+/* soft colour glows that drift behind the sign-in page */
+@keyframes orb-drift {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(var(--dx, 60px), var(--dy, -40px)) scale(1.15);
+  }
+  100% {
+    transform: translate(calc(var(--dx, 60px) * -0.6), calc(var(--dy, -40px) * -0.8)) scale(0.95);
+  }
+}
+
+.login-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(70px);
+  animation: orb-drift var(--t, 22s) ease-in-out infinite alternate;
+}
+
+/* the AI assistant's "typing" dots */
+@keyframes typing-dot {
+  0%,
+  60%,
+  100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+
+.typing-dot {
+  animation: typing-dot 1.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-rise-in,
+  .animate-toast-in,
+  .animate-fade-in,
+  .login-orb,
+  .typing-dot {
+    animation: none;
+  }
+}
+
+/* ---- Dark mode: the palettes are swapped here, so most screens change without being edited ----
+   Light shades (50-300) become dark tints, dark shades (700-950) become light text colours,
+   and the middle shades (400-600: buttons, badges) stay the same. Turned on by class="dark" on <html>. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+html.dark {
+  color-scheme: dark;
+  --surface: #111a2e;
+  --color-ink-50: #0a1120;
+  --color-ink-100: #172137;
+  --color-ink-200: #223049;
+  --color-ink-300: #334155;
+  --color-ink-400: #7b8aa0;
+  --color-ink-500: #94a3b8;
+  --color-ink-600: #b4c0d0;
+  --color-ink-700: #cbd5e1;
+  --color-ink-800: #e2e8f0;
+  --color-ink-900: #f1f5f9;
+  --color-red-50: #302031;
+  --color-red-100: #3d2232;
+  --color-red-200: #582735;
+  --color-red-300: #802f39;
+  --color-red-700: #fca5a5;
+  --color-red-800: #fecaca;
+  --color-red-900: #fee2e2;
+  --color-red-950: #fef2f2;
+  --color-orange-50: #31262b;
+  --color-orange-100: #3f2c29;
+  --color-orange-200: #5b3626;
+  --color-orange-300: #854622;
+  --color-orange-700: #fdba74;
+  --color-orange-800: #fed7aa;
+  --color-orange-900: #ffedd5;
+  --color-orange-950: #fff7ed;
+  --color-amber-50: #312c29;
+  --color-amber-100: #3f3427;
+  --color-amber-200: #5a4423;
+  --color-amber-300: #835c1c;
+  --color-amber-700: #fcd34d;
+  --color-amber-800: #fde68a;
+  --color-amber-900: #fef3c7;
+  --color-amber-950: #fffbeb;
+  --color-yellow-50: #2f2f29;
+  --color-yellow-100: #3c3926;
+  --color-yellow-200: #564b22;
+  --color-yellow-300: #7e661b;
+  --color-yellow-700: #fde047;
+  --color-yellow-800: #fef08a;
+  --color-yellow-900: #fef9c3;
+  --color-yellow-950: #fefce8;
+  --color-green-50: #133235;
+  --color-green-100: #143c38;
+  --color-green-200: #16513d;
+  --color-green-300: #1a7046;
+  --color-green-700: #86efac;
+  --color-green-800: #bbf7d0;
+  --color-green-900: #dcfce7;
+  --color-green-950: #f0fdf4;
+  --color-emerald-50: #11303a;
+  --color-emerald-100: #113a3f;
+  --color-emerald-200: #114d49;
+  --color-emerald-300: #106a58;
+  --color-emerald-700: #6ee7b7;
+  --color-emerald-800: #a7f3d0;
+  --color-emerald-900: #d1fae5;
+  --color-emerald-950: #ecfdf5;
+  --color-teal-50: #11303f;
+  --color-teal-100: #123a46;
+  --color-teal-200: #124d54;
+  --color-teal-300: #12696a;
+  --color-teal-700: #5eead4;
+  --color-teal-800: #99f6e4;
+  --color-teal-900: #ccfbf1;
+  --color-teal-950: #f0fdfa;
+  --color-cyan-50: #0f3045;
+  --color-cyan-100: #0f394f;
+  --color-cyan-200: #0d4c63;
+  --color-cyan-300: #0c6881;
+  --color-cyan-700: #67e8f9;
+  --color-cyan-800: #a5f3fc;
+  --color-cyan-900: #cffafe;
+  --color-cyan-950: #ecfeff;
+  --color-sky-50: #112d48;
+  --color-sky-100: #103653;
+  --color-sky-200: #10466a;
+  --color-sky-300: #10608c;
+  --color-sky-700: #7dd3fc;
+  --color-sky-800: #bae6fd;
+  --color-sky-900: #e0f2fe;
+  --color-sky-950: #f0f9ff;
+  --color-blue-50: #17294a;
+  --color-blue-100: #192f56;
+  --color-blue-200: #1e3b6e;
+  --color-blue-300: #264e92;
+  --color-blue-700: #93c5fd;
+  --color-blue-800: #bfdbfe;
+  --color-blue-900: #dbeafe;
+  --color-blue-950: #eff6ff;
+  --color-indigo-50: #1c2549;
+  --color-indigo-100: #212955;
+  --color-indigo-200: #2b326c;
+  --color-indigo-300: #3a4090;
+  --color-indigo-700: #a5b4fc;
+  --color-indigo-800: #c7d2fe;
+  --color-indigo-900: #e0e7ff;
+  --color-indigo-950: #eef2ff;
+  --color-violet-50: #22234a;
+  --color-violet-100: #292756;
+  --color-violet-200: #382f6e;
+  --color-violet-300: #4e3b92;
+  --color-violet-700: #c4b5fd;
+  --color-violet-800: #ddd6fe;
+  --color-violet-900: #ede9fe;
+  --color-violet-950: #f5f3ff;
+  --color-purple-50: #26224a;
+  --color-purple-100: #2f2656;
+  --color-purple-200: #412d6e;
+  --color-purple-300: #5c3892;
+  --color-purple-700: #d8b4fe;
+  --color-purple-800: #e9d5ff;
+  --color-purple-900: #f3e8ff;
+  --color-purple-950: #faf5ff;
+  --color-pink-50: #30203d;
+  --color-pink-100: #3d2343;
+  --color-pink-200: #572950;
+  --color-pink-300: #7e3164;
+  --color-pink-700: #f9a8d4;
+  --color-pink-800: #fbcfe8;
+  --color-pink-900: #fce7f3;
+  --color-pink-950: #fdf2f8;
+  --color-rose-50: #311f35;
+  --color-rose-100: #3e2138;
+  --color-rose-200: #5a263d;
+  --color-rose-300: #822c46;
+  --color-rose-700: #fda4af;
+  --color-rose-800: #fecdd3;
+  --color-rose-900: #ffe4e6;
+  --color-rose-950: #fff1f2;
+  --color-brand-50: #17294a;
+  --color-brand-100: #192f56;
+  --color-brand-200: #1e3b6e;
+  --color-brand-300: #264e92;
+  --color-brand-700: #4d8ef8;
+  --color-brand-800: #7fb1fa;
+  --color-brand-900: #a9cbfc;
+  --color-brand-950: #dbeafe;
+  --color-accent-50: #112d48;
+  --color-accent-100: #103653;
+  --color-accent-200: #10466a;
+  --color-accent-700: #38bdf8;
+}
+
+:root {
+  --surface: #ffffff;
+}
+
+/* white cards become the dark surface (kept below hover colours so hovers still show) */
+@layer utilities {
+  html.dark :where(.bg-white) {
+    background-color: var(--surface);
+  }
+  html.dark :where(.bg-white\/90) {
+    background-color: rgb(17 26 46 / 0.9);
+  }
+  html.dark :where(.to-white) {
+    --tw-gradient-to: var(--surface);
+  }
+}
